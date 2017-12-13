@@ -1,0 +1,14 @@
+<?php
+$filename="des_big.jpg";
+$src_image=imagecreatefromjpeg($filename);
+list($src_w,$src_h)=getimagesize($filename);
+$scale=0.5;
+$des_w=ceil($src_w*0.5);
+$des_h=ceil($src_h*0.5);
+//创建画布
+$des_image=imagecreatetruecolor($des_w,$des_h);
+imagecopyresampled($des_image,$src_image,0,0,0,0,$des_w,$des_h,$src_w,$src_h);
+header("content-type:image/jpeg");
+imagejpeg($des_image,"uploads/".$filename);
+imagedestroy($src_image);
+imagedestroy($des_image);
